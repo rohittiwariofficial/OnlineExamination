@@ -24,9 +24,31 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
+              "src/assets/exam-admin/js/core/jquery.min.js",
+              "src/assets/exam-admin/js/core/popper.min.js",
+              "src/assets/exam-admin/js/core/bootstrap-material-design.min.js",
+              "src/assets/exam-admin/js/plugins/perfect-scrollbar.jquery.min.js",
+              "src/assets/exam-admin/js/plugins/moment.min.js",
+              "src/assets/exam-admin/js/plugins/sweetalert2.js",
+              "src/assets/exam-admin/js/plugins/jquery.validate.min.js",
+              "src/assets/exam-admin/js/plugins/jquery.bootstrap-wizard.js",
+              "src/assets/exam-admin/js/plugins/bootstrap-selectpicker.js",
+              "src/assets/exam-admin/js/plugins/bootstrap-datetimepicker.min.js",
+              "src/assets/exam-admin/js/plugins/jquery.dataTables.min.js",
+              "src/assets/exam-admin/js/plugins/bootstrap-tagsinput.js",
+              "src/assets/exam-admin/js/plugins/jasny-bootstrap.min.js",
+              "src/assets/exam-admin/js/plugins/fullcalendar.min.js",
+              "src/assets/exam-admin/js/plugins/jquery-jvectormap.js",
+              "src/assets/exam-admin/js/plugins/nouislider.min.js",
+              "src/assets/exam-admin/js/plugins/arrive.min.js",
+              "src/assets/exam-admin/js/plugins/chartist.min.js",
+              "src/assets/exam-admin/js/plugins/bootstrap-notify.js",
+              "src/assets/exam-admin/js/tg-material.min.js",
+              "src/assets/exam-admin/js/backend.js"
             ]
           },
           "configurations": {
@@ -87,42 +109,12 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "src/assets/exam-admin/css",
-              "src/assets/exam-admin/js",
-              "src/assets/exam-admin/js/core",
-              "src/assets/exam-admin/js/plugins",
-              "src/assets/exam-admin/img",
-              "src/assets/exam-admin/img/faces",
-              "src/assets/exam-admin/img/flags"
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"
             ],
             "scripts": [
-              "src/assets/exam-admin/js/core/jquery.min.js",
-              "src/assets/exam-admin/js/core/popper.min.js",
-              "src/assets/exam-admin/js/core/bootstrap-material-design.min.js",
-              "src/assets/exam-admin/js/plugins/perfect-scrollbar.jquery.min.js",
-              "src/assets/exam-admin/js/plugins/moment.min.js",
-              "src/assets/exam-admin/js/plugins/sweetalert2.js",
-              "src/assets/exam-admin/js/plugins/jquery.validate.min.js",
-              "src/assets/exam-admin/js/plugins/jquery.bootstrap-wizard.js",
-              "src/assets/exam-admin/js/plugins/bootstrap-selectpicker.js",
-              "src/assets/exam-admin/js/plugins/bootstrap-datetimepicker.min.js",
-              "src/assets/exam-admin/js/plugins/jquery.dataTables.min.js",
-              "src/assets/exam-admin/js/plugins/bootstrap-tagsinput.js",
-              "src/assets/exam-admin/js/plugins/jasny-bootstrap.min.js",
-              "src/assets/exam-admin/js/plugins/fullcalendar.min.js",
-              "src/assets/exam-admin/js/plugins/jquery-jvectormap.js",
-              "src/assets/exam-admin/js/plugins/nouislider.min.js",
-              "https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js",
-              "src/assets/exam-admin/js/plugins/arrive.min.js",
-              "https://buttons.github.io/buttons.js",
-              "src/assets/exam-admin/js/plugins/chartist.min.js",
-              "src/assets/exam-admin/js/plugins/bootstrap-notify.js",
-              "src/assets/exam-admin/js/tg-material.min.js?v=2.1.0",
-              "src/assets/exam-admin/js/backend.js" 
             ]
           }
         },
