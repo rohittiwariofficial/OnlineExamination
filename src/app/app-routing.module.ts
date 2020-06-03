@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('./exam-admin/exam-admin.module').then(m => m.ExamAdminModule)
   },
   {
+    path: 'sme',
+    loadChildren: () => import('./sme/sme.module').then(m => m.SmeModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
