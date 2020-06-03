@@ -5,7 +5,7 @@ import { SmeComponent } from './sme.component';
 
 const routes: Routes = [
   {
-    path: 'sme',
+    path: '',
     component: SmeComponent
   },
 ];
