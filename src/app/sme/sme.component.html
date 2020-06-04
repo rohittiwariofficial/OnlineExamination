@@ -1,2 +1,11 @@
-<p>sme works!</p>
- 
+<div class="wrapper">
+    <app-sidebar></app-sidebar>
+    <div class="main-panel">
+        <app-header></app-header>
+        <div class="content">
+          <app-dashboard></app-dashboard>
+            <router-outlet></router-outlet>
+        </div>
+        <app-footer></app-footer>
+    </div>
+</div>
