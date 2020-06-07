@@ -15,6 +15,11 @@ export class ExamAdminComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    $("#minimizeSidebar").click(function() {
+      $("body").toggleClass("sidebar-mini");
+      console.log('Fired');
+    })(jQuery);
+
     function setfocusmapcenter() {    
       var mapobj = $('#map').vectormap('get', 'mapobject'),         
       center = mapobj.pointtolatlng(mapobj.width / 2, mapobj.height / 2);      
