@@ -14,10 +14,6 @@ declare var $: any;
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  error = '';
 
   constructor(
       private formBuilder: FormBuilder,
@@ -33,8 +29,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-        email: ['', Validators.required],
-        password: ['', Validators.required]
+        email: ['kacs.rohit.1994@gmail.com', Validators.required],
+        password: ['Admin@123', Validators.required]
     });
 
     $(document).ready(function() {
@@ -50,14 +46,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     
-    this.submitted = true;
-
     // stop here if form is invalid
     if (this.loginForm.invalid) {
         return;
     }
     
-    this.loading = true;
     if ( this.f.email.value == 'kacs.rohit.1994@gmail.com' && 
         this.f.password.value == 'Admin@123' 
     ) {
@@ -66,7 +59,5 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/admin']);
     }
     
-    this.loading = false;
-
   }
 }
