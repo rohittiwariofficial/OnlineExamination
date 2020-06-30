@@ -6,7 +6,7 @@ exports.registerUser = function (req, res) {
 
   newUser.save((err, user) => {
     if (err) {
-      res.send(err);
+      res.json(err);
     }
     res.json(user);
   });

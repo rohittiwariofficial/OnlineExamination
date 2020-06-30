@@ -21,6 +21,7 @@
     "migrate-mongo": "^7.2.1",
     "migrate-mongoose": "^4.0.0",
     "mongoose": "^5.9.19",
+    "mongoose-unique-validator": "^2.0.3",
     "nodemon": "^2.0.4"
   }
 }

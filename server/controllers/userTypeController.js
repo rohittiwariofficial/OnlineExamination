@@ -1,14 +1,14 @@
 var UserType = require("../models/UserType");
 
 exports.add = function (req, res) {
-  if (!req.body.title) {
-    res.status(400).send({ message: "Params can not be empty!" });
+  if (!req.body) {
+    res.status(400).json({ error: "Params can not be empty!" });
     return;
   }
 
   let newUserType = new UserType(req.body);
 
-  newUserType.save(tutorial)
+  newUserType.save(newUserType)
     .then(data => {
       res.json(data);
     })
