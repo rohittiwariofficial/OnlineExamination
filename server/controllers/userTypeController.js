@@ -22,7 +22,6 @@ exports.add = function (req, res) {
 
 exports.view = function (req, res) {
   const id = req.params.id;
-
   UserType.findById(id)
     .then(data => {
       if (!data)
