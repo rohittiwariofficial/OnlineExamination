@@ -4,13 +4,12 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const router = require("./router");
 const mongoDBObj = require("./config/index");
-
+const dotenv = require('dotenv');
 const app = express();
-const PORT = 8000;
 
 //Enable CORS origin
 app.use(cors());
-
+dotenv.config();
 //Create Restful Api for Routing (HttpGet, HttpPost, HttpDelete)
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
@@ -50,6 +49,6 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 app.use("/api", router);
 
-app.listen(PORT, () => {
-  console.log(`server is running http://localhost:${PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`server is running http://localhost:${process.env.PORT}`);
 });

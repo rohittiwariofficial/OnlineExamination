@@ -6,9 +6,9 @@ exports.verifyToken = function (req, res, next) {
      return  res.status(401).json({
       code: 401,
       status:false,
-      message: 'Unauthorized Request.......',
+      message: 'Unauthorized Request!',
       error: [
-        err.message || "Some error occurred while creating the User."
+        err.message || "Some error occurred while token verification."
       ],
       data:[]
     });
@@ -19,22 +19,22 @@ exports.verifyToken = function (req, res, next) {
     return  res.status(401).json({
       code: 401,
       status:false,
-      message: 'Unauthorized Request.......',
+      message: 'Unauthorized Request!',
       error: [
-        err.message || "Some error occurred while creating the User."
+        err.message || "Some error occurred while token verification."
       ],
       data:[]
     });
   } else {
     //jwt.sign()
-    let payload = jwt.verify(token, "secretKey", (err, token1) => {
+    let payload = jwt.verify(token, process.env.JWT_SECRET_KEY, (err, token1) => {
       if (err) {
         return  res.status(401).json({
           code: 401,
           status:false,
-          message: 'Unauthorized Request.......',
+          message: 'Unauthorized Request!',
           error: [
-            err.message || "Some error occurred while creating the User."
+            err.message || "Some error occurred while token verification."
           ],
           data:[]
         });
@@ -59,55 +59,52 @@ exports.login = function (req, res) {
       data:[]
     });
   }
-  User.findOne({ email: userData.email }).then((err,data )=> {
-    console.log(data);
-    if (data==undefined) {
-      res.status(401).json({
+  User.findOne({ email: userData.email },(err, data) => {
+    if (err) {
+      return res.status(401).json({
         code: 401,
         status:false,
-        message: 'invalid username',
+        message: 'Email Id does not exist!',
         error: [
-          err.message || "Some error occurred while creating the User."
+          err.message || "Email Id does not exist!"
         ],
         data:[]
       });
-    } else {
-      if (data.password !== userData.password) {
-        res.status(401).json({
-          code: 401,
-          status:false,
-          message: 'invalid password',
-          error: [
-            err.message || "Some error occurred while creating the User."
-          ],
-          data:[]
-        });
-      } else {
-        let payload = { subject: user._id };
-        let token = jwt.sign(payload, "secretKey");
-        res.status(200).json({
-          code: 200,
-          status:false,
-          message: 'Token created',
-          error: [],
-          data:{ token }
-        });
-
-      }
     }
-  })
-  .catch(err => {
-    res.status(500).json({
-      code: 500,
-      status:false,
-      message: "some error occurred while login",
-      error: [
-        err.message || "Some error occurred while retrieving User."
-      ],
-      data:[]
+
+    if ( data === null ) {
+      return res.status(401).json({
+        code: 401,
+        status:false,
+        message: 'Email Id does not exist!',
+        error: [
+          "Email Id does not exist!."
+        ],
+        data:[]
+      });
+    }
+
+    if (data.password !== userData.password) {
+      return res.status(401).json({
+        code: 401,
+        status:false,
+        message: 'Invalid Password!',
+        error: [
+          "Invalid Password!"
+        ],
+        data:[]
+      });
+    }
+
+    let payload = { subject: userData.email };
+    let token = jwt.sign(payload, "secretKey");
+    res.status(200).json({
+      code: 200,
+      status:true,
+      message: 'Token created',
+      error: [],
+      data:{ token }
     });
   });
 
-
-
-};
+}
