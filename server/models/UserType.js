@@ -8,13 +8,14 @@ var Schema = mongoose.Schema;
 var UserTypeSchema = new Schema({
   name: {
     type: String,
-    unique: 'user type should be unique',
-    required: 'user type should not be empty',
-   },
+    unique: [true, 'user type should be unique'],
+    required: [true, 'user type should not be empty'],
+  },
   status: {
     type: String,
     enum: ["ACTIVE", "INACTIVE"],
-    default: "ACTIVE",
+    //default: "ACTIVE",
+    required: [true, 'status should not be empty'],
   },
   createdBy: {
     type: String,

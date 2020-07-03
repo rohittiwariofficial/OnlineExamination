@@ -23,11 +23,11 @@ router.put("/user_type/update", userTypeController.update);
 router.get("/user_types", userTypeController.userTypes);
 
 //User APIs
-router.post("/user/add", userController.registerUser);
-/* router.post("/user/view/:id", userController.registerUser);
-router.post("/user/delete/:id", userController.registerUser);
-router.put("/user/update", userController.registerUser);
-router.get("/users", userController.getUsers); */
+router.post("/user/add", userController.add);
+/* router.post("/user/view/:id", userController.view);
+router.post("/user/delete/:id", userController.delete);
+router.put("/user/update", userController.update);
+router.get("/users", userController.users); */
 
 
 //Question Level APIs
