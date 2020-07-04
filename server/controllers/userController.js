@@ -2,25 +2,24 @@ var User = require("../models/User");
 
 exports.add = function (req, res) {
   let newUser = new User(req.body);
-  newUser.save(newUser)
-    .then(data => {
+  newUser
+    .save(newUser)
+    .then((data) => {
       res.status(200).json({
         code: 200,
-        status:true,
-        message: 'Add user successfully!',
+        status: true,
+        message: "Add user successfully!",
         error: [],
-        data:[]
+        data: [],
       });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json({
         code: 500,
-        status:false,
-        message: 'Some error occurred while creating the User.',
-        error: [
-          err.message || "Some error occurred while creating the User."
-        ],
-        data:[]
+        status: false,
+        message: "Some error occurred while creating the User.",
+        error: [err.message || "Some error occurred while creating the User."],
+        data: [],
       });
     });
 };
@@ -28,82 +27,75 @@ exports.add = function (req, res) {
 exports.view = function (req, res) {
   const id = req.params.id;
   User.findById(id)
-    .then(data => {
+    .then((data) => {
       if (!data)
         res.status(404).json({
           code: 404,
-          status:false,
+          status: false,
           message: "Not found User",
-          error: [
-            err.message || "Error retrieving User"
-          ],
-          data:[]
+          error: [err.message || "Error retrieving User"],
+          data: [],
         });
-      else res.status(200).json({
-        code: 200,
-        status:true,
-        message: "User Retrieved",
-        error: [],
-        data:data
-      });
+      else
+        res.status(200).json({
+          code: 200,
+          status: true,
+          message: "User Retrieved",
+          error: [],
+          data: data,
+        });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json({
         code: 500,
-        status:false,
-        message: 'Retrieving User Failed!',
-        error: [
-          err.message || "Error retrieving User"
-        ],
-        data:[]
+        status: false,
+        message: "Retrieving User Failed!",
+        error: [err.message || "Error retrieving User"],
+        data: [],
       });
     });
 };
 
 exports.update = function (req, res) {
-    if (!req.body) {
-      return res.status(500).json({
-        code: 500,
-        status:false,
-        message: "Data to update can not be empty!",
-        error: [
-          "Data to update can not be empty!"
-        ],
-        data:[]
-      });
-    }
+  if (!req.body) {
+    return res.status(500).json({
+      code: 500,
+      status: false,
+      message: "Data to update can not be empty!",
+      error: ["Data to update can not be empty!"],
+      data: [],
+    });
+  }
 
-    const id = req.params.id;
-    User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-    .then(data => {
+  const id = req.params.id;
+  User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    .then((data) => {
       if (!data) {
         res.status(404).json({
           code: 404,
-          status:false,
+          status: false,
           message: "Cannot update User. Maybe User was not found!",
           error: [
-            err.message || "Cannot update User. Maybe User was not found!"
+            err.message || "Cannot update User. Maybe User was not found!",
           ],
-          data:[]
+          data: [],
         });
-      } 
-      else res.status(200).json({
-        code: 200,
-        status:true,
-        message: "User updated successfully.",
-        error: [],
-        data:data
-      });
+      } else
+        res.status(200).json({
+          code: 200,
+          status: true,
+          message: "User updated successfully.",
+          error: [],
+          data: data,
+        });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json({
         code: 500,
-        status:false,
+        status: false,
         message: "Error updating User!",
-        error: [
-          err.message || "Error updating User"
-        ],
-        data:[]
+        error: [err.message || "Error updating User"],
+        data: [],
       });
     });
 };
@@ -112,60 +104,56 @@ exports.delete = function (req, res) {
   const id = req.params.id;
 
   User.findByIdAndRemove(id)
-    .then(data => {
+    .then((data) => {
       if (!data) {
         res.status(404).json({
           code: 404,
-          status:false,
+          status: false,
           message: "Cannot delete User. Maybe User was not found!",
           error: [
-            err.message || "Cannot delete User. Maybe User was not found!"
+            err.message || "Cannot delete User. Maybe User was not found!",
           ],
-          data:[]
+          data: [],
         });
       } else {
         res.status(200).json({
           code: 200,
-          status:true,
+          status: true,
           message: "User was deleted successfully!",
           error: [],
-          data:data
+          data: data,
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json({
         code: 500,
-        status:false,
+        status: false,
         message: "Could not delete User",
-        error: [
-          err.message || "Could not delete User"
-        ],
-        data:[]
+        error: [err.message || "Could not delete User"],
+        data: [],
       });
     });
 };
 
-exports.userTypes = function (req, res) {
+exports.users = function (req, res) {
   User.find({})
-    .then(data => {
+    .then((data) => {
       res.status(200).json({
         code: 200,
-        status:true,
+        status: true,
         message: "User list loaded successfully!",
         error: [],
-        data:data
+        data: data,
       });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).json({
         code: 500,
-        status:false,
+        status: false,
         message: "Some error occurred while retrieving User.",
-        error: [
-          err.message || "Some error occurred while retrieving User."
-        ],
-        data:[]
+        error: [err.message || "Some error occurred while retrieving User."],
+        data: [],
       });
     });
 };

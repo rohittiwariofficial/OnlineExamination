@@ -3,43 +3,35 @@ const jwt = require("jsonwebtoken");
 
 exports.verifyToken = function (req, res, next) {
   if (!req.headers.authorization) {
-     return  res.status(401).json({
+    return res.status(401).json({
       code: 401,
-      status:false,
-      message: 'Unauthorized Request!',
-      error: [
-        err.message || "Some error occurred while token verification."
-      ],
-      data:[]
+      status: false,
+      message: "Unauthorized Request!",
+      error: ["Some error occurred while token verification."],
+      data: [],
     });
-
   }
   let token = req.headers.authorization.split(" ")[1];
   if (token === "null") {
-    return  res.status(401).json({
+    return res.status(401).json({
       code: 401,
-      status:false,
-      message: 'Unauthorized Request!',
-      error: [
-        err.message || "Some error occurred while token verification."
-      ],
-      data:[]
+      status: false,
+      message: "Unauthorized Request!!",
+      error: ["Some error occurred while token verification."],
+      data: [],
     });
   } else {
-    //jwt.sign()
-    let payload = jwt.verify(token, process.env.JWT_SECRET_KEY, (err, token1) => {
+    jwt.verify(token, "#Rohit@123", (err, token1) => {
       if (err) {
-        return  res.status(401).json({
+        return res.status(401).json({
           code: 401,
-          status:false,
-          message: 'Unauthorized Request!',
-          error: [
-            err.message || "Some error occurred while token verification."
-          ],
-          data:[]
+          status: false,
+          message: "Unauthorized Request!!!",
+          error: [err || "Some error occurred while token verification."],
+          data: [],
         });
       } else {
-        req.userId = token1.subject;
+        req.email = token1.subject;
         next();
       }
     });
@@ -51,60 +43,51 @@ exports.login = function (req, res) {
   if (!userData) {
     return res.status(500).json({
       code: 500,
-      status:false,
+      status: false,
       message: "login credential  can not be empty!",
-      error: [
-        "login credential can not be empty!"
-      ],
-      data:[]
+      error: ["login credential can not be empty!"],
+      data: [],
     });
   }
-  User.findOne({ email: userData.email },(err, data) => {
+  User.findOne({ email: userData.email }, (err, data) => {
     if (err) {
       return res.status(401).json({
         code: 401,
-        status:false,
-        message: 'Email Id does not exist!',
-        error: [
-          err.message || "Email Id does not exist!"
-        ],
-        data:[]
+        status: false,
+        message: "Email Id does not exist!",
+        error: [err.message || "Email Id does not exist!"],
+        data: [],
       });
     }
 
-    if ( data === null ) {
+    if (data === null) {
       return res.status(401).json({
         code: 401,
-        status:false,
-        message: 'Email Id does not exist!',
-        error: [
-          "Email Id does not exist!."
-        ],
-        data:[]
+        status: false,
+        message: "Email Id does not exist!",
+        error: ["Email Id does not exist!."],
+        data: [],
       });
     }
 
     if (data.password !== userData.password) {
       return res.status(401).json({
         code: 401,
-        status:false,
-        message: 'Invalid Password!',
-        error: [
-          "Invalid Password!"
-        ],
-        data:[]
+        status: false,
+        message: "Invalid Password!",
+        error: ["Invalid Password!"],
+        data: [],
       });
     }
 
     let payload = { subject: userData.email };
-    let token = jwt.sign(payload, "secretKey");
+    let token = jwt.sign(payload, "#Rohit@123");
     res.status(200).json({
       code: 200,
-      status:true,
-      message: 'Token created',
+      status: true,
+      message: "Token created",
       error: [],
-      data:{ token }
+      data: { token },
     });
   });
-
-}
+};

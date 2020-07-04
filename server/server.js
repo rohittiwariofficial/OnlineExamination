@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const router = require("./router");
 const mongoDBObj = require("./config/index");
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 const app = express();
 
 //Enable CORS origin
@@ -49,6 +49,6 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 app.use("/api", router);
 
-app.listen(process.env.PORT, () => {
-  console.log(`server is running http://localhost:${process.env.PORT}`);
+app.listen(3001, () => {
+  console.log(`server is running http://localhost:${3001}`);
 });
