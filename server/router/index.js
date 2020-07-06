@@ -22,18 +22,18 @@ router.post(
   authController.verifyToken,
   userTypeController.add
 );
-router.post(
+router.get(
   "/user_type/view/:id",
   authController.verifyToken,
   userTypeController.view
 );
-router.post(
+router.delete(
   "/user_type/delete/:id",
   authController.verifyToken,
   userTypeController.delete
 );
 router.put(
-  "/user_type/update",
+  "/user_type/update/:id",
   authController.verifyToken,
   userTypeController.update
 );
@@ -45,13 +45,13 @@ router.get(
 
 //User APIs
 router.post("/user/add", authController.verifyToken, userController.add);
-router.post("/user/view/:id", authController.verifyToken, userController.view);
-router.post(
+router.get("/user/view/:id", authController.verifyToken, userController.view);
+router.delete(
   "/user/delete/:id",
   authController.verifyToken,
   userController.delete
 );
-router.put("/user/update", authController.verifyToken, userController.update);
+router.put("/user/update/:id", authController.verifyToken, userController.update);
 router.get("/users", authController.verifyToken, userController.users);
 
 //Question Level APIs

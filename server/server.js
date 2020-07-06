@@ -48,7 +48,16 @@ var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 app.use("/api", router);
+// this matches all routes and all methods
+app.use((req, res, next) => {
+  res.status(404).send({
+    code: 404,
+    status: false,
+    message: "Request not found",
+    error:["Request not found"]
+  })
+ });
 
-app.listen(3001, () => {
-  console.log(`server is running http://localhost:${3001}`);
+app.listen(8000, () => {
+  console.log(`server is running http://localhost:${8000}`);
 });

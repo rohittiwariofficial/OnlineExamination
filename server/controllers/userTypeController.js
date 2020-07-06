@@ -15,7 +15,7 @@ exports.add = function (req, res) {
         status:true,
         message: 'Add user type successfully!',
         error: [],
-        data:[]
+        data:[data]
       });
     })
     .catch(err => {
@@ -59,7 +59,7 @@ exports.view = function (req, res) {
         status:false,
         message: 'Retrieving User Type Failed!',
         error: [
-          err.message || "Error retrieving User Type"
+          err || "Error retrieving User Type"
         ],
         data:[]
       });
@@ -79,8 +79,13 @@ exports.update = function (req, res) {
       });
     }
 
-    const id = req.params.id;
-    UserType.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    const _id = req.params.id;
+    console.log(_id);
+    UserType.findOneAndUpdate({_id:_id}, req.body,{
+      new: true,
+      upsert: false,
+      rawResult: false // Return the raw result from the MongoDB driver
+    })
     .then(data => {
       if (!data) {
         res.status(404).json({
