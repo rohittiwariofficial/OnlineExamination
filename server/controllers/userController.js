@@ -1,7 +1,14 @@
 var User = require("../models/User");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 exports.add = function (req, res) {
   let newUser = new User(req.body);
+  newUser.status = 'ACTIVE';
+  const salt = bcrypt.genSaltSync(saltRounds);
+  const hash = bcrypt.hashSync(newUser.password, salt);
+  newUser.password = hash;
+
   newUser
     .save(newUser)
     .then((data) => {
@@ -10,7 +17,7 @@ exports.add = function (req, res) {
         status: true,
         message: "Add user successfully!",
         error: [],
-        data: [],
+        data: [data],
       });
     })
     .catch((err) => {
@@ -67,8 +74,13 @@ exports.update = function (req, res) {
     });
   }
 
-  const id = req.params.id;
-  User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+  const _id = req.params.id;
+  User.findOneAndUpdate({_id:_id}, req.body, { 
+      useFindAndModify: false, 
+      new: true, upsert: 
+      false, 
+      rawResult: false 
+    })
     .then((data) => {
       if (!data) {
         res.status(404).json({

@@ -80,7 +80,6 @@ exports.update = function (req, res) {
     }
 
     const _id = req.params.id;
-    console.log(_id);
     UserType.findOneAndUpdate({_id:_id}, req.body,{
       new: true,
       upsert: false,

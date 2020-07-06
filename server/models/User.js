@@ -1,4 +1,7 @@
 var mongoose = require("mongoose");
+var uniqueValidator = require('mongoose-unique-validator');
+require('mongoose-type-email');
+mongoose.SchemaTypes.Email.defaults.message = 'Email address is invalid';
 
 // Get the Schema constructor
 var Schema = mongoose.Schema;
@@ -9,7 +12,8 @@ var UserSchema = new Schema({
     type: String,
   },
   email: {
-    type: String,
+    type: mongoose.SchemaTypes.Email,
+    unique: [true, 'User should be unique'],
     required: true,
     pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}",
   },

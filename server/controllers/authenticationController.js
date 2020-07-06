@@ -1,5 +1,14 @@
 var User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+/* var genSalt = exports.genSalt = function (req, res) {
+  bcrypt.genSalt(saltRounds, function(err, salt) {
+    bcrypt.hash(myPlaintextPassword, salt, function(err, hash) {
+        return hash;
+    });
+  });
+}; */
 
 exports.verifyToken = function (req, res, next) {
   if (!req.headers.authorization) {
@@ -66,28 +75,36 @@ exports.login = function (req, res) {
         status: false,
         message: "Email Id does not exist!",
         error: ["Email Id does not exist!."],
-        data: [],
+        data: [data],
       });
     }
 
-    if (data.password !== userData.password) {
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = data.password;
+    const authorized = bcrypt.compareSync(userData.password, hash);
+
+    if ( authorized !== true ) {
       return res.status(401).json({
         code: 401,
         status: false,
         message: "Invalid Password!",
         error: ["Invalid Password!"],
-        data: [],
+        data: []
       });
     }
 
     let payload = { subject: userData.email };
     let token = jwt.sign(payload, "#Rohit@123");
+    let filterData = data.toObject();
+    delete filterData.password;
+    filterData.token =  token;
+console.log(filterData);
     res.status(200).json({
       code: 200,
       status: true,
       message: "Token created",
       error: [],
-      data: { token },
+      data: [filterData]
     });
   });
 };
