@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { fn } from '@angular/compiler/src/output/output_ast';
+import { Router } from '@angular/router';
 
 declare  var jQuery:  any;
 declare var $: any;
@@ -12,12 +13,15 @@ declare var $: any;
 })
 export class ExamAdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) {
+    if (!!localStorage.getItem('token')) { 
+      this.router.navigate(['/admin']);
+    }
+   }
 
   ngOnInit() {
     $("#minimizeSidebar").click(function() {
       $("body").toggleClass("sidebar-mini");
-      console.log('Fired');
     })(jQuery);
 
     function setfocusmapcenter() {    
@@ -31,6 +35,8 @@ export class ExamAdminComponent implements OnInit {
       }      
       mapobj.setfocus(config) 
     }(jQuery)
+
+    
   }
 
 }

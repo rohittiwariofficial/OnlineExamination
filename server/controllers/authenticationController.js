@@ -98,7 +98,6 @@ exports.login = function (req, res) {
     let filterData = data.toObject();
     delete filterData.password;
     filterData.token =  token;
-console.log(filterData);
     res.status(200).json({
       code: 200,
       status: true,
